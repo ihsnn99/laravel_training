@@ -5,7 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
+        @auth
+        <p><a href="{{ route('admin.show') }}">Index</a></p>
+        <p><a href="{{ route('admin.create') }}">Form</a></p>
+        <p><a href="{{ route('logout.attempt') }}">Log Out</a></p>
+        @endauth
 
+        @guest
+        <p><a href="{{ route('login') }}">Login</a></p>
+        @endguest
+        
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
