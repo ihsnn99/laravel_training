@@ -80,17 +80,6 @@ class ExampleController extends Controller
         return redirect()->route('admin.show');
     }
 
-    public static function getHttpHeaders(){
-        $headers = [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/vnd.BNM.API.v1+json'
-            ],
-            'http_errors' => false,
-        ];
-        return $headers;
-    }
-
     public function getfromAPI(){
         $res = Http::withHeaders([
             'Content-Type' => 'application/json',
