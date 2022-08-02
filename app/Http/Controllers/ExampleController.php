@@ -7,6 +7,7 @@ use App\Models\Code;
 use App\Mail\CodeCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class ExampleController extends Controller
@@ -91,10 +92,12 @@ class ExampleController extends Controller
     }
 
     public function getfromAPI(){
-        $client = new \GuzzleHttp\Client(self::getHttpHeaders());
-
-        $res = $client->request('GET', 'https://api.bnm.gov.my/public/exchange-rate');
-        $currencyResponse = $res->getBody()->getContents();
+        $res = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/vnd.BNM.API.v1+json'
+        ])->get('https://api.bnm.gov.my/public/exchange-rate');
+        
+        $currencyResponse = $res->body();
 
         return json_decode($currencyResponse);
     }
